@@ -17,31 +17,29 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      User user1 = new User("User1", "LastName1", "User1@mail.ru", new Car("Car1", 111));
-      User user2 = new User("User2", "LastName2", "User2@mail.ru", new Car("Car2", 222));
-
-/*      Car car1 = new Car("Car1", 111);
+      Car car1 = new Car("Car1", 111);
       Car car2 = new Car("Car2", 222);
 
+      User user1 = new User("User1", "LastName1", "User1@mail.ru", car1);
+      User user2 = new User("User2", "LastName2", "User2@mail.ru", car2);
+
+
+
+/*
       user1.setCar(car1);
-      user2.setCar(car2);*/
+      user2.setCar(car2);
+*/
 
       userService.add(user1);
       userService.add(user2);
 
       List<User> users = userService.listUsers();
       for (User user : users) {
-         System.out.println("Id = "+user.getId());
-         System.out.println("First Name = "+user.getFirstName());
-         System.out.println("Last Name = "+user.getLastName());
-         System.out.println("Email = "+user.getEmail());
-         System.out.println("Model = "+user.getCar().getModel());
-         System.out.println("Series = "+user.getCar().getSeries());
-         System.out.println();
+         System.out.println(user.toString());
       }
 
       try {
-         User carUser = userService.getCarUser("Car1", 111);
+         User carUser = userService.getCarUser(car1);
          System.out.println(carUser);
       } catch (NoResultException e) {
          System.out.println("User отсутствует");
